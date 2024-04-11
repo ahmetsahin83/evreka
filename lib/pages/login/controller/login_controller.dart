@@ -1,6 +1,4 @@
 import 'package:evreka/pages/_app_exports.dart';
-import 'package:evreka/service/auth/auth_service.dart';
-import 'package:flutter/cupertino.dart';
 
 class LoginController extends GetxController {
   final AuthService _authService = AuthService();

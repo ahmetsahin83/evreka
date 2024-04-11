@@ -7,6 +7,12 @@ class AppTextStyles {
     color: AppColors.darkBlue,
   );
 
+  static final TextStyle h4 = GoogleFonts.openSans(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: AppColors.darkGrey,
+  );
+
   static final TextStyle t2 = GoogleFonts.openSans(
     fontSize: 20,
     fontWeight: FontWeight.w400,

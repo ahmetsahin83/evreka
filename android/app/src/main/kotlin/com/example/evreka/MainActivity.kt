@@ -1,4 +1,4 @@
-package app.evreka.case
+package app.evreka.maps
 
 import io.flutter.embedding.android.FlutterActivity
 
