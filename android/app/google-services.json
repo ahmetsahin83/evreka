@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "109998372586",
+    "firebase_url": "https://evreka-3d762-default-rtdb.firebaseio.com",
+    "project_id": "evreka-3d762",
+    "storage_bucket": "evreka-3d762.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109998372586:android:72bafd284369d8fffb0993",
+        "android_client_info": {
+          "package_name": "app.evreka.case"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJGbfXD-zrgOYYG-PwAlVgMzjHefMrVeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

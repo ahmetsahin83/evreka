@@ -1,0 +1,53 @@
+name: evreka
+description: "A new Flutter project."
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+
+  # Google Maps
+  google_maps_flutter: ^2.6.0
+
+  # Error Handling
+  dartz: ^0.10.1
+
+  # Firebase
+  firebase_auth: ^4.19.1
+  firebase_core: ^2.29.0
+  firebase_database: ^10.5.1
+
+  # Internet Connection Checker
+  internet_connection_checker: ^1.0.0+1
+
+  # Storage
+  shared_preferences: ^2.2.2
+
+  # Routing
+  go_router: ^13.2.3
+
+  # State Management
+  get: ^4.6.6
+
+  # Dependency Injection
+  get_it: ^7.6.8
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
