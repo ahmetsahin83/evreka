@@ -22,26 +22,26 @@ class LoginView extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: _bgDecoration,
         child: Padding(
-          padding: const EdgeInsets.all(30),
+          padding: EdgeInsets.all(30.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
               SvgPicture.asset(
                 "assets/icons/Logo.svg",
-                height: 30,
+                height: 30.h,
               ),
-              const SizedBox(height: 80),
+              SizedBox(height: 80.h),
               Text(
                 "Please enter your user name and password.",
                 style: AppTextStyles.t2,
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: 50.h),
               AppTextField(
                 labelText: "Username",
                 controller: serviceLocator<LoginController>().emailController,
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: 40.h),
               AppTextField(
                 labelText: "Password",
                 controller: serviceLocator<LoginController>().passwordController,

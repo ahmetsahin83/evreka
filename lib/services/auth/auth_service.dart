@@ -24,6 +24,7 @@ class AuthService {
       } else if (e.code == "invalid-credential") {
         return const Left('Invalid credential provided.');
       } else {
+        await Sentry.captureException(e, stackTrace: e);
         return const Left('An error occurred while signing in.');
       }
     }

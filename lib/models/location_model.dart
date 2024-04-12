@@ -1,13 +1,20 @@
-class Location {
+class LocationModel {
   final double latitude;
   final double longitude;
 
-  Location({required this.latitude, required this.longitude});
+  LocationModel({required this.latitude, required this.longitude});
 
-  factory Location.fromMap(Map<String, dynamic> map) {
-    return Location(
+  factory LocationModel.fromMap(Map<String, dynamic> map) {
+    return LocationModel(
       latitude: map['latitude'],
       longitude: map['longitude'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'latitude': latitude,
+      'longitude': longitude,
+    };
   }
 }

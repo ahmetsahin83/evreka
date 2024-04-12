@@ -9,7 +9,7 @@ class LoginController extends GetxController {
 
   Future<void> login(BuildContext context) async {
     if (await checkInternetConnection() == false) {
-      return showErrorSnackBar(
+      return showAppSnackBar(
         "Please check your internet connection.",
         context,
       );
@@ -29,7 +29,7 @@ class LoginController extends GetxController {
     result.fold(
       (String error) {
         Navigator.of(context).pop();
-        showErrorSnackBar(
+        showAppSnackBar(
           error,
           context,
         );

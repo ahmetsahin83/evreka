@@ -9,11 +9,41 @@ class HomeView extends StatelessWidget {
       floatingActionButton: GetBuilder<HomeController>(
         init: HomeController(),
         id: "map",
-        initState: (_) {},
         builder: (homeController) {
           if (homeController.selectedContainer != null) {
+            if (homeController.isRelocating) {
+              return Container(
+                height: 170.h,
+                width: MediaQuery.of(context).size.width - 20.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "Please select a location from the map for your bin to be relocated. You can select a location by tapping on the map.",
+                      style: AppTextStyles.t1,
+                    ),
+                    AppButton(
+                      buttonText: "SAVE",
+                      onPressed: () async => await homeController.relocateContainer(context),
+                    ),
+                  ],
+                ),
+              );
+            }
             return Visibility(
-              visible: homeController.selectedContainer != null,
+              visible: homeController.selectedContainer != null && !homeController.isRelocating,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -26,15 +56,15 @@ class HomeView extends StatelessWidget {
                     ),
                   ],
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 19),
-                height: 230,
-                width: MediaQuery.of(context).size.width - 20,
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 19.h),
+                height: 250.h,
+                width: MediaQuery.of(context).size.width - 20.w,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      homeController.selectedContainer!.containerId,
+                      "Container ${homeController.selectedContainer!.containerId}",
                       style: AppTextStyles.h3,
                     ),
                     Text(
@@ -42,7 +72,15 @@ class HomeView extends StatelessWidget {
                       style: AppTextStyles.h4,
                     ),
                     Text(
-                      homeController.selectedContainer!.dateOfDataReceived.formattedDate,
+                      "Sensor ID: ${homeController.selectedContainer!.sensorId}",
+                      style: AppTextStyles.t1,
+                    ),
+                    Text(
+                      "Container Temperature: ${homeController.selectedContainer!.containerTemperature.toStringAsFixed(2)}",
+                      style: AppTextStyles.t1,
+                    ),
+                    Text(
+                      "Sensor data date: ${homeController.selectedContainer!.dateOfDataReceived.formattedDate}",
                       style: AppTextStyles.t1,
                     ),
                     Text(
@@ -60,7 +98,7 @@ class HomeView extends StatelessWidget {
                         Expanded(
                           child: AppButton(
                             buttonText: "NAVIGATE",
-                            onPressed: () {},
+                            onPressed: () async => homeController.navigateToLocation(context),
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ),
@@ -68,7 +106,7 @@ class HomeView extends StatelessWidget {
                         Expanded(
                           child: AppButton(
                             buttonText: "RELOCATE",
-                            onPressed: () {},
+                            onPressed: homeController.relocateButton,
                             width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         )
@@ -86,7 +124,6 @@ class HomeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: GetBuilder<HomeController>(
         init: HomeController(),
-        initState: (_) {},
         id: "map",
         builder: (homeController) {
           return GoogleMap(
@@ -95,22 +132,8 @@ class HomeView extends StatelessWidget {
               await homeController.onCameraIdle(context);
             },
             onCameraIdle: () async => await homeController.onCameraIdle(context),
-            onTap: (LatLng latLng) async {
-              if (homeController.selectedContainer != null) {
-                homeController.markers!
-                    .removeWhere((element) => element.markerId == MarkerId(homeController.selectedContainer!.containerId));
-                homeController.markers!.add(Marker(
-                    markerId: MarkerId(homeController.selectedContainer!.containerId),
-                    position: LatLng(
-                      homeController.selectedContainer!.location.latitude,
-                      homeController.selectedContainer!.location.longitude,
-                    ),
-                    icon: homeController.yellowMarker));
-                homeController.selectedContainer = null;
-              }
-              homeController.update(["map"]);
-            },
-            initialCameraPosition: const CameraPosition(target: LatLng(39.8974483, 32.7762401), zoom: 14),
+            onTap: (LatLng latLng) async => await homeController.onTap(latLng),
+            initialCameraPosition: const CameraPosition(target: LatLng(39.8974483, 32.7762401), zoom: 13),
             markers: homeController.markers ?? {},
           );
         },

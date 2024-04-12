@@ -26,8 +26,8 @@ class AppButton extends StatelessWidget {
           ),
         ],
       ),
-      height: 43,
-      width: width,
+      height: 43.h,
+      width: width.w,
       child: ElevatedButton(
         onPressed: isDisable ? null : onPressed,
         style: ElevatedButton.styleFrom(
@@ -35,10 +35,10 @@ class AppButton extends StatelessWidget {
           disabledBackgroundColor: AppColors.green.withOpacity(.3),
           elevation: 0,
           shadowColor: AppColors.shadowColorGreen,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5.r)),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(vertical: 8.h),
         ),
         child: Text(buttonText, style: AppTextStyles.buttonTextStyle),
       ),

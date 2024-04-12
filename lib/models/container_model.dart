@@ -3,7 +3,7 @@ import 'package:evreka/models/location_model.dart';
 
 class ContainerModel {
   final String containerId;
-  final Location location;
+  LocationModel location;
   final double occupancyRate;
   final String containerInformation;
   final double containerTemperature;
@@ -23,12 +23,24 @@ class ContainerModel {
   factory ContainerModel.fromMap(Map<String, dynamic> map) {
     return ContainerModel(
       containerId: map['containerId'],
-      location: Location.fromMap(map['location']),
+      location: LocationModel.fromMap(map['location']),
       occupancyRate: map['occupancyRate'],
       containerInformation: map['containerInformation'],
       containerTemperature: map['containerTemperature'],
       dateOfDataReceived: (map['dateOfDataReceived'] as Timestamp).toDate(),
       sensorId: map['sensorId'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'containerId': containerId,
+      'location': location.toMap(),
+      'occupancyRate': occupancyRate,
+      'containerInformation': containerInformation,
+      'containerTemperature': containerTemperature,
+      'dateOfDataReceived': dateOfDataReceived,
+      'sensorId': sensorId,
+    };
   }
 }
