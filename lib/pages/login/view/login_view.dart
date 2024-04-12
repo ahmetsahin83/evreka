@@ -1,6 +1,3 @@
-import 'package:evreka/core/utils/service_locator.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../../_app_exports.dart';
 
 class LoginView extends StatelessWidget {

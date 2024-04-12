@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:evreka/pages/_app_exports.dart';
 
 class LoginController extends GetxController {

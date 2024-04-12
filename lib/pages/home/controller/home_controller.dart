@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:evreka/pages/_app_exports.dart';
 
 class HomeController extends GetxController {
@@ -6,34 +8,54 @@ class HomeController extends GetxController {
   Set<Marker>? markers;
   late List<ContainerModel> nearbyContainers;
 
+  ContainerModel? selectedContainer;
+
   BitmapDescriptor yellowMarker = BitmapDescriptor.defaultMarker;
   BitmapDescriptor greenMarker = BitmapDescriptor.defaultMarker;
 
-//servise taşı---------------------------------------------------
-  Future<List<ContainerModel>> getNearbyContainers() async {
-    final CollectionReference containersRef = FirebaseFirestore.instance.collection('containers');
+  final HomeService _homeService = serviceLocator<HomeService>();
 
-    double minLat = bounds.southwest.latitude;
-    double maxLat = bounds.northeast.latitude;
-    double minLng = bounds.southwest.longitude;
-    double maxLng = bounds.northeast.longitude;
+  getNearbyContainers(BuildContext context) async {
+    final result = await _homeService.getNearbyContainers(bounds);
 
-    final QuerySnapshot querySnapshot = await containersRef
-        .where("location.latitude", isGreaterThanOrEqualTo: minLat)
-        .where("location.latitude", isLessThanOrEqualTo: maxLat)
-        .where("location.longitude", isGreaterThanOrEqualTo: minLng)
-        .where("location.longitude", isLessThanOrEqualTo: maxLng)
-        .get();
-
-    final List<ContainerModel> nearbyContainers = querySnapshot.docs.map((doc) {
-      final data = doc.data() as Map<String, dynamic>;
-      ContainerModel container = ContainerModel.fromMap(data);
-      return container;
-    }).toList();
-
-    print(nearbyContainers.length);
-
-    return nearbyContainers;
+    result.fold((left) => showErrorSnackBar(left, context), (right) {
+      nearbyContainers = right;
+    });
   }
-//servise taşı---------------------------------------------------
+
+  Future<void> onCameraIdle(BuildContext context) async {
+    bounds = await mapController.getVisibleRegion();
+    await getNearbyContainers(context);
+    markers = Set.from(nearbyContainers.asMap().entries.map((container) {
+      String id = container.value.containerId;
+      LatLng location = LatLng(container.value.location.latitude, container.value.location.longitude);
+      return Marker(
+        markerId: MarkerId(id.toString()),
+        position: location,
+        onTap: () {
+          selectedContainer = container.value;
+          update(["map"]);
+          markers!.removeWhere((element) => element.markerId == MarkerId(id));
+          markers!.add(Marker(
+            markerId: MarkerId(id),
+            position: location,
+            icon: yellowMarker,
+          ));
+        },
+        icon: greenMarker,
+      );
+    }));
+    if (selectedContainer != null) {
+      markers!.removeWhere((element) => element.markerId == MarkerId(selectedContainer!.containerId));
+      markers!.add(Marker(
+        markerId: MarkerId(selectedContainer!.containerId),
+        position: LatLng(
+          selectedContainer!.location.latitude,
+          selectedContainer!.location.longitude,
+        ),
+        icon: yellowMarker,
+      ));
+    }
+    update(["map"]);
+  }
 }

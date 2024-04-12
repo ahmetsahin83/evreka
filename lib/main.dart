@@ -7,10 +7,11 @@ import 'pages/_app_exports.dart';
 // late List<ContainerModel> locList;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  setupServiceLocator();
 
   FirebaseAuth.instance.currentUser != null ? initialLocation = "/home" : initialLocation = "/";
-  setupServiceLocator();
   serviceLocator<HomeController>().greenMarker = await addCustomIcon("assets/icons/greenMarker.png");
   serviceLocator<HomeController>().yellowMarker = await addCustomIcon("assets/icons/yellowMarker.png");
 

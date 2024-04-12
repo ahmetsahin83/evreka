@@ -30,6 +30,7 @@ void showErrorSnackBar(String text, BuildContext context) {
           SvgPicture.asset(
             "assets/icons/Error.svg",
             height: 20,
+            // ignore: deprecated_member_use
             color: AppColors.errorColor,
           ),
           const SizedBox(width: 10),
