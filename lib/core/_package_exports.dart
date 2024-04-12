@@ -12,3 +12,4 @@ export 'package:firebase_auth/firebase_auth.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter/cupertino.dart' hide RefreshCallback;
+export 'package:cloud_firestore/cloud_firestore.dart' hide Order;

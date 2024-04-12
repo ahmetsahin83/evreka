@@ -22,7 +22,7 @@ dependencies:
   # Firebase
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
-  firebase_database: ^10.5.1
+  cloud_firestore: ^4.16.1
 
   # Internet Connection Checker
   internet_connection_checker: ^1.0.0+1
@@ -40,6 +40,7 @@ dependencies:
   get_it: ^7.6.8
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
+  geodesy: ^0.10.2
 
 dev_dependencies:
   flutter_test:
