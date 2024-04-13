@@ -127,4 +127,8 @@ class OperationController extends GetxController {
       showAppSnackBar("An error occured while trying to open Google Maps!", context);
     }
   }
+
+  Stream<ContainerModel> getContainerInformation() {
+    return _operationService.getContainerInformation(int.parse(selectedContainer!.containerId));
+  }
 }

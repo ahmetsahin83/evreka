@@ -51,6 +51,14 @@ class OperationService {
       return const Left('An error occurred while relocating the container.');
     }
   }
+
+  Stream<ContainerModel> getContainerInformation(int containerId) {
+    final CollectionReference containersRef = FirebaseFirestore.instance.collection('containers3');
+    return containersRef.doc('Container $containerId').snapshots().map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      return ContainerModel.fromMap(data);
+    });
+  }
   // used for once to generate random containers and add them to firestore
 
   List<ContainerModel> generateRandomContainers(LocationModel centerLocation, int count) {
