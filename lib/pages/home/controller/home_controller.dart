@@ -19,7 +19,7 @@ class HomeController extends GetxController {
 
   final HomeService _homeService = serviceLocator<HomeService>();
 
-  getNearbyContainers(BuildContext context) async {
+  Future<void> getNearbyContainers(BuildContext context) async {
     final result = await _homeService.getNearbyContainers(bounds);
 
     result.fold((left) => showAppSnackBar(left, context), (right) {

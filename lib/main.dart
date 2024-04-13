@@ -5,7 +5,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAuth.instance.signOut();
   FirebaseAuth.instance.currentUser != null ? initialLocation = "/home" : initialLocation = "/";
   setupServiceLocator();
   serviceLocator<HomeController>().greenMarker = await addCustomIcon(AssetPath.greenMarker);
