@@ -76,7 +76,7 @@ class HomeController extends GetxController {
             selectedContainer!.location.latitude,
             selectedContainer!.location.longitude,
           ),
-          icon: yellowMarker));
+          icon: greenMarker));
       selectedContainer = null;
     } else if (isRelocating) {
       relocatedContainer!.location = LocationModel(latitude: latLng.latitude, longitude: latLng.longitude);

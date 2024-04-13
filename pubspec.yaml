@@ -40,12 +40,15 @@ dependencies:
 
   # Dependency Injection
   get_it: ^7.6.8
+
+  # UI
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
-  geodesy: ^0.10.2
   url_launcher: ^6.2.6
-  sentry_flutter: ^7.19.0
   flutter_screenutil: ^5.9.0
+
+  # Error Reporting
+  sentry_flutter: ^7.19.0
 
 dev_dependencies:
   flutter_test:

@@ -29,7 +29,7 @@ void showAppSnackBar(String text, BuildContext context, {bool isError = true}) {
         children: [
           if (isError) ...[
             SvgPicture.asset(
-              "assets/icons/Error.svg",
+              AssetPath.error,
               height: 20.h,
               // ignore: deprecated_member_use
               color: AppColors.errorColor,

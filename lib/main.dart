@@ -5,11 +5,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAuth.instance.signOut();
   FirebaseAuth.instance.currentUser != null ? initialLocation = "/home" : initialLocation = "/";
   setupServiceLocator();
-  serviceLocator<HomeController>().greenMarker = await addCustomIcon("assets/icons/greenMarker.png");
-  serviceLocator<HomeController>().yellowMarker = await addCustomIcon("assets/icons/yellowMarker.png");
-  serviceLocator<HomeController>().lightYellowMarker = await addCustomIcon("assets/icons/lightYellowMarker.png");
+  serviceLocator<HomeController>().greenMarker = await addCustomIcon(AssetPath.greenMarker);
+  serviceLocator<HomeController>().yellowMarker = await addCustomIcon(AssetPath.yellowMarker);
+  serviceLocator<HomeController>().lightYellowMarker = await addCustomIcon(AssetPath.lightYellowMarker);
 
   //generate containers in firebase database
   // final homeService = serviceLocator<HomeService>();
