@@ -4,13 +4,13 @@ final serviceLocator = GetIt.instance;
 
 void setupServiceLocator() {
   serviceLocator.registerLazySingleton(() => AuthService());
-  serviceLocator.registerLazySingleton(() => HomeService());
+  serviceLocator.registerLazySingleton(() => OperationService());
 
   final loginController = Get.put(LoginController());
 
   serviceLocator.registerLazySingleton(() => loginController);
 
-  final homeController = Get.put(HomeController());
+  final operationController = Get.put(OperationController());
 
-  serviceLocator.registerLazySingleton(() => homeController);
+  serviceLocator.registerLazySingleton(() => operationController);
 }

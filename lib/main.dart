@@ -7,14 +7,14 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseAuth.instance.currentUser != null ? initialLocation = "/home" : initialLocation = "/";
   setupServiceLocator();
-  serviceLocator<HomeController>().greenMarker = await addCustomIcon(AssetPath.greenMarker);
-  serviceLocator<HomeController>().yellowMarker = await addCustomIcon(AssetPath.yellowMarker);
-  serviceLocator<HomeController>().lightYellowMarker = await addCustomIcon(AssetPath.lightYellowMarker);
+  serviceLocator<OperationController>().greenMarker = await addCustomIcon(AssetPath.greenMarker);
+  serviceLocator<OperationController>().yellowMarker = await addCustomIcon(AssetPath.yellowMarker);
+  serviceLocator<OperationController>().lightYellowMarker = await addCustomIcon(AssetPath.lightYellowMarker);
 
   //generate containers in firebase database
-  // final homeService = serviceLocator<HomeService>();
-  // homeService
-  //     .addContainersToFirestore(homeService.generateRandomContainers(LocationModel(latitude: 39.8974483, longitude: 32.7762401), 1500));
+  // final operationService = serviceLocator<OperationService>();
+  // operationService
+  //     .addContainersToFirestore(operationService.generateRandomContainers(LocationModel(latitude: 39.8974483, longitude: 32.7762401), 1500));
 
   await SentryFlutter.init((options) {
     options.dsn = 'https://a8041bd423e8f2697a93561440b50702@o4507075211165696.ingest.de.sentry.io/4507075212410960';

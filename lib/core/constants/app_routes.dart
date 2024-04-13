@@ -13,7 +13,7 @@ final router = GoRouter(
     GoRoute(
       path: '/home',
       name: "home",
-      builder: (context, state) => const HomeView(),
+      builder: (context, state) => const OperationView(),
     ),
   ],
 );
